@@ -1,0 +1,23 @@
+{% extends "entries/base.html" %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<article>
+    <h2 class="mark">{% now "Y-m-d H:i" %}</em></h2>
+    <a href="{% url 'entry-create' %}"><button>Add new entry</button></a>
+</article>
+    {% for entry in entry_list %}
+        <article>
+            <h2 class="{{ entry.date_created|date:'l' }}">
+                {{ entry.date_created|date:'Y-m-d H:i' }}
+            </h2>
+            <h3>
+                <a href="{% url 'entry-detail' entry.id %}">
+                    {{ entry.title }}
+                </a>
+            </h3>
+        </article>
+    {% endfor %}
+{% endblock %}
